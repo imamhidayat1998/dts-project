@@ -4,25 +4,28 @@ import (
 	"dts-project/api/router"
 	"dts-project/configs"
 	"dts-project/pkg/database"
-	"goo/pkg/model/repository"
-	"kantor/ms-queue-go/service/usecase"
+	"dts-project/pkg/model/repository"
+	"dts-project/pkg/model/usecase"
 )
 
 func main() {
-	Start()
+	start()
 
 }
-func Start()  {
+func start() {
 	app := configs.Config{}
 	app.CatchError(app.InitEnv())
+	url := app.GetURLProject()
 	dbConfig := app.GetDBConfig()
 	mysql, err := database.DBConnection(dbConfig)
 	if err != nil {
 		return
 	}
 
+
 	DataRepositorys := repository.NewDataRepository(mysql)
 	serviceCenterUsecase := usecase.NewServiceCenter(DataRepositorys)
-	router.Router(serviceCenterUsecase)
+
+	router.Router(url,serviceCenterUsecase)
 
 }

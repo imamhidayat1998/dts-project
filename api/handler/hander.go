@@ -36,3 +36,17 @@ func (s *ServiceHandler)CreateUsersHandler(w http.ResponseWriter, r *http.Reques
 	api.Json(w,r,result,http.StatusOK)
 
 }
+func (s *ServiceHandler) UpdateUsersHandlers(w http.ResponseWriter, r *http.Request)  {
+
+	var requestData request.User
+	decoder := json.NewDecoder(r.Body)
+	err := decoder.Decode(&requestData)
+	if err != nil {
+		return
+	}
+	err = s.serviceUsecase.UpdateUsers(requestData)
+	if err != nil {
+		return
+	}
+	api.Json(w,r,"Updated Success",http.StatusOK)
+}

@@ -5,3 +5,10 @@ type User struct {
 	Fullname string `json:"fullname"`
 	Password string `json:"password"`
 }
+
+
+type URL struct {
+	Host string
+	Port string
+
+}
