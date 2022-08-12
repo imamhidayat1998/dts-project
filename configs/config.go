@@ -8,9 +8,9 @@ import (
 
 	"github.com/joho/godotenv"
 )
+
 type Config struct {
 }
-
 
 func (c *Config) InitEnv() error {
 	err := godotenv.Load("/Users/funxd/go/src/dts-project/pkg/data.env")
@@ -35,10 +35,10 @@ func (c *Config) GetDBConfig() database.ConfigDB {
 func (c *Config) CatchError(err error) {
 	if err != nil {
 		log.Println(err)
-//		panic(any(err))
+		panic((err))
 	}
 }
-func (c *Config) GetURLProject() request.URL{
+func (c *Config) GetURLProject() request.URL {
 	return request.URL{
 		Host: os.Getenv("HOST"),
 		Port: os.Getenv("PORT"),

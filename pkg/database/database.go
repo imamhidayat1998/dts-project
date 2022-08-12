@@ -6,6 +6,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 )
+
 type ConfigDB struct {
 	Driver   string
 	DBName   string
@@ -14,7 +15,6 @@ type ConfigDB struct {
 	Host     string
 	Port     string
 }
-
 
 func DBConnection(c ConfigDB) (*sql.DB, error) {
 	connString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
