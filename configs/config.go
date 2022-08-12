@@ -1,8 +1,8 @@
 package configs
 
 import (
-	"log"
 	"dts-project/pkg/database"
+	"log"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -28,5 +28,10 @@ func (c *Config) GetDBConfig() database.ConfigDB {
 		Password: os.Getenv("DB_PWD"),
 		Host:     os.Getenv("DB_HOST"),
 		Port:     os.Getenv("DB_PORT"),
+	}
+}
+func (c *Config) CatchError(err error) {
+	if err != nil {
+		panic(any(err))
 	}
 }
