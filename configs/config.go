@@ -14,7 +14,7 @@ type Config struct {
 }
 
 func (c *Config) InitEnv() error {
-	err := godotenv.Load("data.env")
+	err := godotenv.Load("configs/data.env")
 	if err != nil {
 		log.Println("failed while load env: ", err)
 		return err
