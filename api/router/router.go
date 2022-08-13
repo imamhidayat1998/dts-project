@@ -15,9 +15,10 @@ func Router(url request.URL, serviceCenterHandler model.DataUseCase) {
 	RouterUser := mux.NewRouter()
 
 	h := handler.NewServiceHandler(serviceCenterHandler)
-	RouterUser.HandleFunc("/create", h.CreateUsersHandler).Methods("POST")
+	RouterUser.HandleFunc("/create", h.Create).Methods("POST")
 	RouterUser.HandleFunc("/update", h.UpdateUsersHandlers).Methods("PUT")
 	RouterUser.HandleFunc("/create-artikel", h.CreateArtikelHandler).Methods("POST")
+	RouterUser.HandleFunc("/", h.Index).Methods("GET")
 
 	headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type"})
 	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"})

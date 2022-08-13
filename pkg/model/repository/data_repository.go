@@ -88,3 +88,29 @@ func (d Repository) CreateArtikel(params request.Artikel) (string, error) {
 	return fmt.Sprintf("CreateUser Result : %d", DataResult), err
 
 }
+func (d Repository) GetArtikel() ([]request.Artikel, error) {
+	Result, err := d.db.Query(queries.GetArtikel)
+	if err != nil {
+		fmt.Printf("Detail Error in Queries Params : %s", err)
+		return nil, err
+	}
+	data := []request.Artikel{}
+	if Result.Next() {
+		var list request.Artikel
+		err = Result.Scan(&list.Judul, &list.Author, &list.Description, &list.CreatedAt)
+		if err != nil {
+			fmt.Printf("Detail Error in Scan Params : %s", err)
+			return nil, err
+		}
+		data = append(data, list)
+
+	}
+
+	err = Result.Err()
+	if err != nil {
+		fmt.Printf("Detail Error in Rows Params : %s", err)
+		return nil, err
+	}
+
+	return data, err
+}

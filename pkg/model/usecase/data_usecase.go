@@ -3,6 +3,7 @@ package usecase
 import (
 	"dts-project/pkg/model"
 	"dts-project/pkg/model/request"
+	"fmt"
 	"log"
 )
 
@@ -35,11 +36,19 @@ func (r ServiceCenterUsecase) UpdateUsers(params request.User) error {
 
 }
 
-func (r ServiceCenterUsecase) CreateArtikel(params request.Artikel) (string,error){
+func (r ServiceCenterUsecase) CreateArtikel(params request.Artikel) (string, error) {
 	Result, err := r.serviceCenterRepo.CreateArtikel(params)
 	if err != nil {
 		log.Println(err)
 		return "", err
 	}
 	return Result, err
+}
+func (r ServiceCenterUsecase) GetArtikels() ([]request.Artikel, error) {
+	Data, err := r.serviceCenterRepo.GetArtikel()
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+	return Data, err
 }

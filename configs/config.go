@@ -3,6 +3,7 @@ package configs
 import (
 	"dts-project/pkg/database"
 	"dts-project/pkg/model/request"
+	"fmt"
 	"log"
 	"os"
 
@@ -13,7 +14,7 @@ type Config struct {
 }
 
 func (c *Config) InitEnv() error {
-	err := godotenv.Load("/Users/funxd/go/src/dts-project/pkg/data.env")
+	err := godotenv.Load("data.env")
 	if err != nil {
 		log.Println("failed while load env: ", err)
 		return err
@@ -34,8 +35,8 @@ func (c *Config) GetDBConfig() database.ConfigDB {
 }
 func (c *Config) CatchError(err error) {
 	if err != nil {
-		log.Println(err)
-		panic((err))
+		fmt.Println(err)
+		panic(any(err))
 	}
 }
 func (c *Config) GetURLProject() request.URL {
